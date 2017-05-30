@@ -1,0 +1,93 @@
+//Segmented sieve with some modifications
+import java.util.*;
+ 
+class primes
+{
+	public static ArrayList<Integer> p = new ArrayList<>();
+	public static boolean preflag[] = new boolean[1000001]; 
+	public primes()
+	{
+	    int h = 1000000;
+		int n = 0;
+		for(int i=2;i<=h;i++)
+		{
+			if(preflag[i] == false)
+			{
+			    p.add(i);
+				for(int j=i*2 ; j<=h ; j+=i)
+				{
+					preflag[j] = true;
+				}
+			}
+		}
+	}
+	void segmentedSieve(int l, int h)
+	{
+	    if(h<=1000000)
+	    {
+	       for(int i=Math.max(2,l);i<=h;i++)
+	        {
+	            if(preflag[i] == false)
+	            {
+	                System.out.println(i);
+	            }
+	        }
+	    }
+	    else
+	    {
+    		if(l<1000000)
+			{
+				for(int i = l ; i<=1000000; i++)
+				{
+					if(preflag[i] == false)
+						System.out.println(i);
+				}
+			}
+			int low = Math.max(1000000,l);
+    		int limit = ((int)Math.sqrt(h));
+            int range = h-low +1;
+			boolean flag[] = new boolean[range];
+			for(int i = 0; i<p.size() ; i++)
+			{
+				int tmp = p.get(i);
+				if(tmp<=limit)
+				{
+					int start = ((int)low/tmp)*tmp;
+					if(start<low)
+						start += tmp;
+					for(int j = start; j<=h ; j+=tmp)
+					{
+						if(j-low>=0)
+						{
+							flag[j-low] = true;
+						}
+					}
+				}
+				else
+					break;
+			}
+			for(int i = 0; i < range; i++)
+			{
+				if(flag[i] == false)
+				{
+					System.out.println(i+low);
+				}
+			}
+		}
+		System.out.println("");
+	}
+	
+	
+	public static void main(String args[])
+	{
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		for(int i =0;i<t;i++)
+		{
+			int m = sc.nextInt();
+			int n = sc.nextInt();
+			primes obj = new primes();
+			obj.segmentedSieve(m,n);
+		}
+	}
+} 
