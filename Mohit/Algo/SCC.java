@@ -1,3 +1,5 @@
+// Program to find strongly connected components of a given directed graph
+
 import java.io.*;
 import java.util.*;
 
