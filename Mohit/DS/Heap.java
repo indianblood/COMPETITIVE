@@ -25,24 +25,18 @@ class Heap
 		}
 		values[endIndex] = x;
 		
-		int tmp = values[0];
-		values[0] = values[endIndex];
+		int tmp = values[1];
+		values[1] = values[endIndex];
 		values[endIndex] = tmp;
 		
-		heapify(0);
+		heapify(1);
 	}
 	
 	public void buildHeap(int a[])
 	{
-		for(int i = endIndex ; i >= endIndex/2 ; i--)
+		for(int i = endIndex/2 ; i >= 1 ; i--)
 		{
-			int parent = i/2;
-			if(a[parent] > a[i])
-			{
-				int tmp = a[parent];
-				a[parent] = a[i];
-				a[i] = tmp;
-			}
+			heapify(i);
 		}
 		for(int i =0 ; i<a.length ; i++)
 		{
@@ -57,7 +51,7 @@ class Heap
 		int val = values[0];
 		values[0] = values[endIndex];
 		endIndex--;
-		heapify(0);
+		heapify(1);
 	}
 	
 	public void heapify(int i)
