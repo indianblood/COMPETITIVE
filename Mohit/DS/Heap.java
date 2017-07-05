@@ -1,8 +1,13 @@
-// A simple MinHeap Implemenation with all the functions
+// A simple MinHeap Implemenation with all the function
+
 import java.util.*;
+
 class Heap
 {
+	//Assuming maximum number of elements to be 200
+	//Taking the starting index as 1
 	private static int values[] = new int[201];
+	//stores the index of last element in the heap
 	private static int endIndex = 0;
 	
 	public Heap(int a[])
