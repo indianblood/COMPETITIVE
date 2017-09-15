@@ -1,5 +1,7 @@
 //Implementation of Segment tree for "Sum of elements in a range problem"
 
+// RECURSIVE IMPLEMENTATION - LESS EFFICIENT
+
 import java.util.*;
 
 class SegmentTree
