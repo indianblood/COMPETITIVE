@@ -1,0 +1,71 @@
+#include<iostream>
+#include<utility>
+#include<cstring>
+using namespace std;
+typedef long long ll;
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int t;
+  cin>>t;
+  while(t--)
+  {
+    int n,m;
+    cin>>n>>m;
+    int minSalary[n+1];
+    for(int i=1;i<n+1;i++)
+      cin>>minSalary[i];
+    pair <ll,ll> off_max[m+1]; // This Pair contains offeredsalary and maxJobOffers of m companies
+    for(int i=1;i<m+1;i++)
+    {
+      cin>>off_max[i].first>>off_max[i].second;
+    }
+    string str;
+    ll maxi=0;
+    ll tot=0;
+    ll selected=0;
+    ll compsel=0;
+    ll index;
+    bool company[m+1]={0};//To check whether the company has placed even a single student
+    for(int i=1;i<n+1;i++)
+    {
+      cin>>str;
+      maxi=-1;
+      index=0;
+      for(int j=1;j<m+1;j++)
+      {
+        if(str[j-1]=='1')
+        {
+          if(off_max[j].first>=minSalary[i] && off_max[j].first>maxi && off_max[j].second>0)
+          {
+            maxi=off_max[j].first;
+            index=j;
+          }
+        }
+      }
+      if(index!=0)
+      {
+        selected+=1;
+        if(!company[index])
+        {
+          company[index]=true;
+          compsel+=1;
+          off_max[index].second-=1;
+        }
+        else
+          off_max[index].second-=1;
+        tot+=off_max[index].first;
+      }
+      else
+      {
+        continue;
+      }
+
+    }
+    cout<<selected<<" "<<tot<<" "<<m-compsel<<endl;
+
+
+  }
+  return 0;
+}
