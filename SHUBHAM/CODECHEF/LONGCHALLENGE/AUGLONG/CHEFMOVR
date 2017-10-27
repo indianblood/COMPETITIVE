@@ -1,0 +1,79 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+typedef long long ll;
+using namespace std;
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+
+  ll t,n,d;
+  ll tot,tot_sub,ctr_sub,diff,moves;
+  cin>>t;
+  while(t--)
+  {
+    cin>>n>>d;
+    ll a[n+1];
+    tot=0;
+    for(ll i=1;i<n+1;i++)
+    {
+      cin>>a[i];
+      tot+=a[i];
+    }
+    int flag=0;
+    if(tot%n!=0)
+      flag=1;
+    ll avg=tot%n;
+    //cout<<avg<<endl;
+    moves=0;
+    for(ll j=1;j<d+1 && flag==0;j++)
+    {
+      tot_sub=0;
+      ctr_sub=0;
+      for(ll i=j;i<n+1;i+=d)
+      {
+        tot_sub+=a[i];
+        ctr_sub+=1;
+      }
+      diff=0;
+      if(tot_sub%ctr_sub!=avg)
+        flag=1;
+      //cout<<tot_sub<<endl;
+      //cout<<ctr_sub<<endl;
+      for(ll i=j;i<n+1 && flag==0;i=i+d)
+      {
+        if(i+d<n+1)
+        {
+          if(a[i]==avg)
+            continue;
+          else
+          {
+            if(a[i]>avg)
+            {
+              diff=a[i]-avg;
+              a[i+d]=a[i+d]+diff;
+              a[i]=diff;
+              moves+=diff;
+            }
+            else
+            {
+              diff=avg-a[i];
+              a[i+d]=a[i+d]-diff;
+              a[i]=avg;
+              moves+=diff;
+            }
+          }
+        }
+      }
+
+    }
+      if(flag==0)
+        cout<<moves<<endl;
+      else
+        cout<<"-1"<<endl;
+  }
+
+  return 0;
+}
