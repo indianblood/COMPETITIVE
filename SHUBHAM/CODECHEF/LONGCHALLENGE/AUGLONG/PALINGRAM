@@ -1,0 +1,67 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string a;
+        string b;
+        cin>>a;
+        cin>>b;
+
+        char ch;
+        //cout<<a<<endl;
+        //cout<<b<<endl;
+        int ch1[26];
+        int ch2[26];
+
+        for(int i=0;i<26;i++){
+            ch1[i]=0;ch2[i]=0;
+        }
+
+        for(int i=0;i<a.size();i++)
+        {
+            ch=a[i];
+            //cout<<int(ch)<<endl;
+            ch1[int(ch)-97]+=1;
+            ch=b[i];
+            ch2[int(ch)-97]+=1;
+        }
+        int flag=0;
+
+        for(int i=0;i<26;i++){
+            //cout<<char(i+97)<<" "<<ch1[i]<<" "<<ch2[i]<<endl;
+            //cout<<char(i+97)<<" "<<ch2[i]<<endl;
+            if(ch1[i]>=2 && ch2[i]==0) {
+                flag = 1;
+                break;
+            }
+        }
+        int ctr_uniqa=0;
+        int ctr_uniqb=0;
+        for(int i=0;i<26;i++){
+            if(ch1[i]==1 && ch2[i]==0){
+                ctr_uniqa+=1;
+            }
+            if(ch1[i]==0 && ch2[i]>=1){
+                ctr_uniqb+=1;
+            }
+        }
+        if(ctr_uniqa>=1 && ctr_uniqb==0)
+            flag=1;
+
+        if(flag==1)
+            cout<<"A"<<endl;
+        else
+            cout<<"B"<<endl;
+
+    }
+    return 0;
+}
